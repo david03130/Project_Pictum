@@ -87,4 +87,18 @@ public class PlayerController : MonoBehaviour
             IsRunnign = false;
         }
     }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        // TODO: Change this to actual jumping functionality.
+        if (context.started)
+        {
+            IsMoving = true;
+            IsRunnign = true;
+        }
+        // else if (context.canceled)
+        // {
+        //     IsRunnign = false;
+        // }
+    }
 }

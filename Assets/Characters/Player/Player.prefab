@@ -214,10 +214,14 @@ MonoBehaviour:
     m_ActionId: 4eba7e58-1927-409a-b39a-db1b74e64c3d
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6639c4f4-0c8a-4819-b663-943efc59de61
+    m_ActionName: Player/TouchInput
+  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1643251620254393273}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnRun
+        m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -227,8 +231,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: c316b067-c468-4e36-b3e0-d61cb652db8b
-    m_ActionName: Player/Run
+    m_ActionId: c9b6fa46-4573-416b-a46b-f251b20bcdf7
+    m_ActionName: Player/Jump
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
