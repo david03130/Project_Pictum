@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Assets.Scripts.Constants;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
         set
         {
             _isMoving = value;
-            _animator.SetBool("isMoving", value);
+            _animator.SetBool(AnimatorStrings.IsMoving, value);
         }
     }
 
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
         set
         {
             _isRunnign = value;
-            _animator.SetBool("isRunning", value);
+            _animator.SetBool(AnimatorStrings.IsRunning, value);
         }
     }
 
