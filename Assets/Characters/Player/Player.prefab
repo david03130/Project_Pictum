@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1643251620254393273}
   - component: {fileID: 1405264165588446447}
   - component: {fileID: 2314520681405212919}
+  - component: {fileID: 611587517350552865}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -121,7 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab709e4b20a0d2448957724e7b0e17b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
+  walkSpeed: 1
+  runSpeed: 2
   _isMoving: 0
   _isRunnign: 0
 --- !u!114 &1405264165588446447
@@ -167,14 +169,6 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 18570311-90d1-46f0-95bd-2c06aa455ca9
-    m_ActionName: Player/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: cb9bce63-14a7-4ff8-81d6-7663de0ad523
-    m_ActionName: Player/Fire[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 373acf74-f97c-4aa7-9cd8-10de1747244e
     m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -213,10 +207,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 4eba7e58-1927-409a-b39a-db1b74e64c3d
     m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6639c4f4-0c8a-4819-b663-943efc59de61
-    m_ActionName: Player/TouchInput
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1643251620254393273}
@@ -259,3 +249,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &611587517350552865
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4850496499421779981}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0029454231, y: -0.12518787}
+  m_Size: {x: 0.6524248, y: 1.1730404}
+  m_Direction: 0
