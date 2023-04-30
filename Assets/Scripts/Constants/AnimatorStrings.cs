@@ -5,7 +5,7 @@ namespace Assets.Scripts.Constants
 {
     public class AnimatorStrings
     {
-        public static readonly string IsMoving = nameof(IsMoving);
-        public static readonly string IsRunning = nameof(IsRunning);
+        public static readonly string IsMoving = "isMoving";
+        public static readonly string IsRunning = "isRunning";
     }
 }
