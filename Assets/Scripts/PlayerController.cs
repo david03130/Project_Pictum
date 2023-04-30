@@ -6,10 +6,12 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float walkSpeed = 5f;
+    public float walkSpeed = 3f;
+    public float runSpeed = 5f;
 
     [SerializeField]
     private bool _isMoving = false;
+    // IsMoving also sets the animation bool inside
     public bool IsMoving
     {
         get
@@ -38,6 +40,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public float CurrentMoveSpeed
+    {
+        get
+        {
+            if (IsMoving)
+            {
+                if (IsRunnign)
+                {
+                    return runSpeed;
+                }
+                else
+                {
+                    return walkSpeed;
+                }
+            }
+            else
+            {
+                // Iddle speed is 0.
+                return 0;
+            }
+        }
+    }
 
     Vector2 moveInput;
     Rigidbody2D rb;
@@ -58,21 +82,22 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // transform.Translate(1 * 1.5f * Time.deltaTime, 0, 0);
+    }
+
+    private void FixedUpdate()
+    {
+        // float x = moveInput.x * walkSpeed;
+        // float y = rb.velocity.y;
+        // rb.velocity = new Vector2(x, y);
         transform.Translate(1 * 1.5f * Time.deltaTime, 0, 0);
     }
 
 
-    private void FixedUpdate()
-    {
-        float x = moveInput.x * walkSpeed;
-        float y = rb.velocity.y;
-        rb.velocity = new Vector2(x, y);
-    }
-
+    #region Events
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-
         IsMoving = moveInput != Vector2.zero;
     }
 
@@ -101,4 +126,6 @@ public class PlayerController : MonoBehaviour
         //     IsRunnign = false;
         // }
     }
+
+    #endregion
 }
