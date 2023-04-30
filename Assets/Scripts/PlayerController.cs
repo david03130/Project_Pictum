@@ -7,8 +7,8 @@ using Assets.Scripts.Constants;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float walkSpeed = 0.2f;
-    public float runSpeed = 0.5f;
+    public float walkSpeed;
+    public float runSpeed;
 
     [SerializeField]
     private bool _isMoving = false;
@@ -111,7 +111,6 @@ public class PlayerController : MonoBehaviour
         float x = CurrentMoveSpeed;
         float y = rb.velocity.y;
         rb.velocity = new Vector2(x, y);
-        //transform.Translate(x, y, 0);
     }
 
 
