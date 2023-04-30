@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float walkSpeed = 3f;
-    public float runSpeed = 5f;
+    public float walkSpeed = 1.5f;
+    public float runSpeed = 2f;
 
     [SerializeField]
     private bool _isMoving = false;
@@ -82,35 +82,37 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // transform.Translate(1 * 1.5f * Time.deltaTime, 0, 0);
+
     }
 
     private void FixedUpdate()
     {
-        // float x = moveInput.x * walkSpeed;
-        // float y = rb.velocity.y;
-        // rb.velocity = new Vector2(x, y);
-        transform.Translate(1 * 1.5f * Time.deltaTime, 0, 0);
+        float x = CurrentMoveSpeed;
+        float y = rb.velocity.y;
+        rb.velocity = new Vector2(x, y);
+        //transform.Translate(x, y, 0);
     }
 
 
     #region Events
+    // De normal esta función no se va a ejecutar pk el movimiento es automático.
     public void OnMove(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
-        IsMoving = moveInput != Vector2.zero;
+        //moveInput = context.ReadValue<Vector2>();
+        //IsMoving = moveInput != Vector2.zero;
     }
 
+    // De normal esta función no se va a ejecutar pk el movimiento es automático.
     public void OnRun(InputAction.CallbackContext context)
     {
-        if (context.started)
-        {
-            IsRunnign = true;
-        }
-        else if (context.canceled)
-        {
-            IsRunnign = false;
-        }
+        //if (context.started)
+        //{
+        //    IsRunnign = true;
+        //}
+        //else if (context.canceled)
+        //{
+        //    IsRunnign = false;
+        //}
     }
 
     public void OnJump(InputAction.CallbackContext context)
