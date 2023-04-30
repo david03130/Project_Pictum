@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float walkSpeed = 1.5f;
-    public float runSpeed = 2f;
+    public float walkSpeed = 0.2f;
+    public float runSpeed = 0.5f;
 
     [SerializeField]
     private bool _isMoving = false;
@@ -40,6 +40,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    private bool _isFacingRight = true;
+    public bool IsFacingRight
+    {
+        get { return _isFacingRight; }
+        set
+        {
+            if (_isFacingRight != value)
+            {
+                // The reasoon we flip the entire GameObject is bc that's going to make flipping the child elements
+                // of the object much easier than if we just flipped the sprite alone.
+                transform.localScale = new Vector2(-1, 1);
+            }
+            _isFacingRight = value;
+        }
+    }
+
+
     public float CurrentMoveSpeed
     {
         get
@@ -71,6 +89,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        IsMoving = true;
+        IsRunnign = true;
     }
 
     // Start is called before the first frame update
@@ -117,16 +137,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        // TODO: Change this to actual jumping functionality.
-        if (context.started)
-        {
-            IsMoving = true;
-            IsRunnign = true;
-        }
-        // else if (context.canceled)
-        // {
-        //     IsRunnign = false;
-        // }
     }
 
     #endregion
