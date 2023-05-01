@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    [SerializeField]
     private bool _isFacingRight = true;
     public bool IsFacingRight
     {
@@ -111,6 +111,8 @@ public class PlayerController : MonoBehaviour
         float x = CurrentMoveSpeed;
         float y = rb.velocity.y;
         rb.velocity = new Vector2(x, y);
+
+        _animator.SetFloat(AnimatorStrings.yVelocity, rb.velocity.y);
     }
 
 
