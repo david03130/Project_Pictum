@@ -7,5 +7,7 @@ namespace Assets.Scripts.Constants
     {
         public static readonly string IsMoving = "isMoving";
         public static readonly string IsRunning = "isRunning";
+        public static readonly string IsGrounded = "isGrounded";
+        public static readonly string yVelocity = "yVelocity";
     }
 }
