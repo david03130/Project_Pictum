@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Assets.Scripts.Constants;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class PlayerController : MonoBehaviour
 {
+    // I'm setting these fields in the editor Player prefab.
     public float walkSpeed;
     public float runSpeed;
+    public float jumpImpulse;
+    TouchingDirections touchingDirections;
 
     [SerializeField]
     private bool _isMoving = false;
@@ -22,7 +25,7 @@ public class PlayerController : MonoBehaviour
         set
         {
             _isMoving = value;
-            _animator.SetBool(AnimatorStrings.IsMoving, value);
+            animator.SetBool(AnimatorStrings.IsMoving, value);
         }
     }
 
@@ -37,7 +40,7 @@ public class PlayerController : MonoBehaviour
         set
         {
             _isRunnign = value;
-            _animator.SetBool(AnimatorStrings.IsRunning, value);
+            animator.SetBool(AnimatorStrings.IsRunning, value);
         }
     }
 
@@ -84,26 +87,15 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveInput;
     Rigidbody2D rb;
-    Animator _animator;
+    Animator animator;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        touchingDirections = GetComponent<TouchingDirections>();
         IsMoving = true;
         IsRunnign = true;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void FixedUpdate()
@@ -112,7 +104,7 @@ public class PlayerController : MonoBehaviour
         float y = rb.velocity.y;
         rb.velocity = new Vector2(x, y);
 
-        _animator.SetFloat(AnimatorStrings.yVelocity, rb.velocity.y);
+        animator.SetFloat(AnimatorStrings.yVelocity, rb.velocity.y);
     }
 
 
@@ -139,6 +131,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        // TODO: Check if alive aswell
+        if (context.started && touchingDirections.IsGrounded)
+        {
+            animator.SetTrigger(AnimatorStrings.Jump);
+            rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
+        }
     }
 
     #endregion
