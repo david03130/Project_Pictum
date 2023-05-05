@@ -3,12 +3,14 @@ using UnityEngine;
 
 namespace Assets.Scripts.Constants
 {
-    public class AnimatorStrings
+    public static class AnimatorStrings
     {
-        public static readonly string IsMoving = "isMoving";
-        public static readonly string IsRunning = "isRunning";
-        public static readonly string IsGrounded = "isGrounded";
-        public static readonly string yVelocity = "yVelocity";
-        public static readonly string Jump = "jump";
+        public const string IsMoving = "isMoving";
+        public const string IsRunning = "isRunning";
+        public const string IsGrounded = "isGrounded";
+        public const string yVelocity = "yVelocity";
+        public const string Jump = "jump";
+        public const string IsOnWall = "isOnWall";
+        public const string IsOnCeiling = "isOnCeiling";
     }
 }

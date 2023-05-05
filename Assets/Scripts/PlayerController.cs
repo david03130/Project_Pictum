@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     // I'm setting these fields in the editor Player prefab.
     public float walkSpeed;
     public float runSpeed;
+    //public float airWalkSpeed;
     public float jumpImpulse;
     TouchingDirections touchingDirections;
 
@@ -61,12 +62,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     public float CurrentMoveSpeed
     {
         get
         {
-            if (IsMoving)
+            if (IsMoving && !touchingDirections.IsOnWall)
             {
                 if (IsRunnign)
                 {
