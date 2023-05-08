@@ -10,13 +10,13 @@ public class PlayerController : MonoBehaviour
     // I'm setting these fields in the editor Player prefab.
     public float walkSpeed;
     public float runSpeed;
-    //public float airWalkSpeed;
     public float jumpImpulse;
     TouchingDirections touchingDirections;
+    //public float airWalkSpeed;
 
+    // These properties also set the animation states inside their setter.
     [SerializeField]
     private bool _isMoving = false;
-    // IsMoving also sets the animation bool inside
     public bool IsMoving
     {
         get
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_isFacingRight != value)
             {
-                // The reasoon we flip the entire GameObject is bc that's going to make flipping the child elements
+                // The reason we flip the entire GameObject is bc that's going to make flipping the child elements
                 // of the object much easier than if we just flipped the sprite alone.
                 transform.localScale = new Vector2(-1, 1);
             }
@@ -86,12 +86,12 @@ public class PlayerController : MonoBehaviour
     }
 
     Vector2 moveInput;
-    Rigidbody2D rb;
+    Rigidbody2D rigidBody;
     Animator animator;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirections = GetComponent<TouchingDirections>();
         IsMoving = true;
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
         float y = rb.velocity.y;
         rb.velocity = new Vector2(x, y);
 
-        animator.SetFloat(AnimatorStrings.yVelocity, rb.velocity.y);
+        animator.SetFloat(AnimatorStrings.yVelocity, rigidBody.velocity.y);
     }
 
 
