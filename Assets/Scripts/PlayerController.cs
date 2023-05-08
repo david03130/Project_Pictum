@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    Vector2 moveInput;
+    //Vector2 moveInput;
     Rigidbody2D rigidBody;
     Animator animator;
 
@@ -101,8 +101,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         float x = CurrentMoveSpeed;
-        float y = rb.velocity.y;
-        rb.velocity = new Vector2(x, y);
+        float y = rigidBody.velocity.y;
+        rigidBody.velocity = new Vector2(x, y);
 
         animator.SetFloat(AnimatorStrings.yVelocity, rigidBody.velocity.y);
     }
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
         if (context.started && touchingDirections.IsGrounded)
         {
             animator.SetTrigger(AnimatorStrings.Jump);
-            rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpImpulse);
         }
     }
 
