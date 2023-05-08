@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Assets.Scripts.Constants;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class PlayerController : MonoBehaviour
 {
-    public float walkSpeed = 3f;
-    public float runSpeed = 5f;
+    // I'm setting these fields in the editor Player prefab.
+    public float walkSpeed;
+    public float runSpeed;
+    public float jumpImpulse;
+    TouchingDirections touchingDirections;
+    //public float airWalkSpeed;
 
+    // These properties also set the animation states inside their setter.
     [SerializeField]
     private bool _isMoving = false;
-    // IsMoving also sets the animation bool inside
     public bool IsMoving
     {
         get
@@ -21,7 +26,7 @@ public class PlayerController : MonoBehaviour
         set
         {
             _isMoving = value;
-            _animator.SetBool("isMoving", value);
+            animator.SetBool(AnimatorStrings.IsMoving, value);
         }
     }
 
@@ -36,7 +41,24 @@ public class PlayerController : MonoBehaviour
         set
         {
             _isRunnign = value;
-            _animator.SetBool("isRunning", value);
+            animator.SetBool(AnimatorStrings.IsRunning, value);
+        }
+    }
+
+    [SerializeField]
+    private bool _isFacingRight = true;
+    public bool IsFacingRight
+    {
+        get { return _isFacingRight; }
+        set
+        {
+            if (_isFacingRight != value)
+            {
+                // The reason we flip the entire GameObject is bc that's going to make flipping the child elements
+                // of the object much easier than if we just flipped the sprite alone.
+                transform.localScale = new Vector2(-1, 1);
+            }
+            _isFacingRight = value;
         }
     }
 
@@ -44,7 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            if (IsMoving)
+            if (IsMoving && !touchingDirections.IsOnWall)
             {
                 if (IsRunnign)
                 {
@@ -63,68 +85,58 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    Vector2 moveInput;
-    Rigidbody2D rb;
-    Animator _animator;
+    //Vector2 moveInput;
+    Rigidbody2D rigidBody;
+    Animator animator;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // transform.Translate(1 * 1.5f * Time.deltaTime, 0, 0);
+        rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        touchingDirections = GetComponent<TouchingDirections>();
+        IsMoving = true;
+        IsRunnign = true;
     }
 
     private void FixedUpdate()
     {
-        // float x = moveInput.x * walkSpeed;
-        // float y = rb.velocity.y;
-        // rb.velocity = new Vector2(x, y);
-        transform.Translate(1 * 1.5f * Time.deltaTime, 0, 0);
+        float x = CurrentMoveSpeed;
+        float y = rigidBody.velocity.y;
+        rigidBody.velocity = new Vector2(x, y);
+
+        animator.SetFloat(AnimatorStrings.yVelocity, rigidBody.velocity.y);
     }
 
 
     #region Events
+    // De normal esta función no se va a ejecutar pk el movimiento es automático.
     public void OnMove(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
-        IsMoving = moveInput != Vector2.zero;
+        //moveInput = context.ReadValue<Vector2>();
+        //IsMoving = moveInput != Vector2.zero;
     }
 
+    // De normal esta función no se va a ejecutar pk el movimiento es automático.
     public void OnRun(InputAction.CallbackContext context)
     {
-        if (context.started)
-        {
-            IsRunnign = true;
-        }
-        else if (context.canceled)
-        {
-            IsRunnign = false;
-        }
+        //if (context.started)
+        //{
+        //    IsRunnign = true;
+        //}
+        //else if (context.canceled)
+        //{
+        //    IsRunnign = false;
+        //}
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        // TODO: Change this to actual jumping functionality.
-        if (context.started)
+        // TODO: Check if alive aswell
+        if (context.started && touchingDirections.IsGrounded)
         {
-            IsMoving = true;
-            IsRunnign = true;
+            animator.SetTrigger(AnimatorStrings.Jump);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpImpulse);
         }
-        // else if (context.canceled)
-        // {
-        //     IsRunnign = false;
-        // }
     }
 
     #endregion
