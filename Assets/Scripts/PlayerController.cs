@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float runSpeed;
     public float jumpImpulse;
     TouchingDirections touchingDirections;
+    // TODO: Implementar airWalkSpeed para hacer el movimiento más accesible.
     //public float airWalkSpeed;
 
     // These properties also set the animation states inside their setter.
