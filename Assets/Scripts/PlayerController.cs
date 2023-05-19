@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float runSpeed;
     public float jumpImpulse;
     TouchingDirections touchingDirections;
+    // TODO: Implementar airWalkSpeed para hacer el movimiento más accesible.
     //public float airWalkSpeed;
 
     // These properties also set the animation states inside their setter.
@@ -56,7 +57,14 @@ public class PlayerController : MonoBehaviour
             {
                 // The reason we flip the entire GameObject is bc that's going to make flipping the child elements
                 // of the object much easier than if we just flipped the sprite alone.
-                transform.localScale = new Vector2(-1, 1);
+                if (value)
+                {
+                    transform.localScale = new Vector2(1, 1);
+                }
+                else
+                {
+                    transform.localScale = new Vector2(-1, 1);
+                }
             }
             _isFacingRight = value;
         }
@@ -66,15 +74,29 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            if (IsMoving && !touchingDirections.IsOnWall)
+            if (IsMoving)
             {
-                if (IsRunnign)
+                if (IsFacingRight)
                 {
-                    return runSpeed;
+                    if (IsRunnign)
+                    {
+                        return runSpeed;
+                    }
+                    else
+                    {
+                        return walkSpeed;
+                    }
                 }
                 else
                 {
-                    return walkSpeed;
+                    if (IsRunnign)
+                    {
+                        return runSpeed * -1;
+                    }
+                    else
+                    {
+                        return walkSpeed * -1;
+                    }
                 }
             }
             else
@@ -100,8 +122,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float x = CurrentMoveSpeed;
-        float y = rigidBody.velocity.y;
+        float x, y;
+        if (touchingDirections.IsOnWall && !touchingDirections.IsOnCeiling)
+        {
+            IsFacingRight = !IsFacingRight;
+        }
+
+        x = CurrentMoveSpeed;
+        y = rigidBody.velocity.y;
         rigidBody.velocity = new Vector2(x, y);
 
         animator.SetFloat(AnimatorStrings.yVelocity, rigidBody.velocity.y);
@@ -131,7 +159,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        // TODO: Check if alive aswell
         if (context.started && touchingDirections.IsGrounded)
         {
             animator.SetTrigger(AnimatorStrings.Jump);
