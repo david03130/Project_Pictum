@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Assets.Scripts.Constants;
+using System;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class PlayerController : MonoBehaviour
@@ -59,11 +60,11 @@ public class PlayerController : MonoBehaviour
                 // of the object much easier than if we just flipped the sprite alone.
                 if (value)
                 {
-                    transform.localScale = new Vector2(1, 1);
+                    transform.localScale = new Vector2(Math.Abs(transform.localScale.x), transform.localScale.y);
                 }
                 else
                 {
-                    transform.localScale = new Vector2(-1, 1);
+                    transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
                 }
             }
             _isFacingRight = value;
