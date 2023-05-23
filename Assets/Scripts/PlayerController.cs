@@ -108,7 +108,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //Vector2 moveInput;
     Rigidbody2D rigidBody;
     Animator animator;
 
@@ -138,26 +137,6 @@ public class PlayerController : MonoBehaviour
 
 
     #region Events
-    // De normal esta función no se va a ejecutar pk el movimiento es automático.
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        //moveInput = context.ReadValue<Vector2>();
-        //IsMoving = moveInput != Vector2.zero;
-    }
-
-    // De normal esta función no se va a ejecutar pk el movimiento es automático.
-    public void OnRun(InputAction.CallbackContext context)
-    {
-        //if (context.started)
-        //{
-        //    IsRunnign = true;
-        //}
-        //else if (context.canceled)
-        //{
-        //    IsRunnign = false;
-        //}
-    }
-
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started && touchingDirections.IsGrounded)

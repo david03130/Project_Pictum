@@ -37421,7 +37421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1643251620254393273, guid: 8bd8cff628c0d4c4d9ca5a3eed88abaa, type: 3}
       propertyPath: jumpImpulse
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4850496499421779978, guid: 8bd8cff628c0d4c4d9ca5a3eed88abaa, type: 3}
       propertyPath: m_RootOrder
