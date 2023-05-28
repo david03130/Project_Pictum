@@ -37483,6 +37483,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4850496499421779981, guid: 8bd8cff628c0d4c4d9ca5a3eed88abaa, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bd8cff628c0d4c4d9ca5a3eed88abaa, type: 3}
 --- !u!114 &4850496500813326368 stripped
@@ -37503,6 +37507,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3613292123410838415, guid: f853fcb5bcb6c814e976b336fca96cdd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7.4371963
+      objectReference: {fileID: 0}
     - target: {fileID: 4839529512365407930, guid: f853fcb5bcb6c814e976b336fca96cdd, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -37513,7 +37521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4839529512365407930, guid: f853fcb5bcb6c814e976b336fca96cdd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -24.4
+      value: -24.47
       objectReference: {fileID: 0}
     - target: {fileID: 4839529512365407930, guid: f853fcb5bcb6c814e976b336fca96cdd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -37554,10 +37562,6 @@ PrefabInstance:
     - target: {fileID: 9060582436956702079, guid: f853fcb5bcb6c814e976b336fca96cdd, type: 3}
       propertyPath: m_Name
       value: BolitaEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 9060582436956702079, guid: f853fcb5bcb6c814e976b336fca96cdd, type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f853fcb5bcb6c814e976b336fca96cdd, type: 3}
