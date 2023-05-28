@@ -1,3 +1,4 @@
+using Assets.Scripts.Constants;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,8 +7,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class Bolita : MonoBehaviour
 {
+    public DetectionZone playerDetectionZone;
+    public DetectionZone cliffDetectionZone;
     public float walkSpeed;
     Rigidbody2D rigidBody;
+    Animator animator;
 
     public enum WalkableDirection
     {
@@ -34,16 +38,34 @@ public class Bolita : MonoBehaviour
         }
     }
 
+    private bool _hasTarget = false;
+
+    public bool HasTarget
+    {
+        get { return _hasTarget; }
+        set
+        {
+            _hasTarget = value;
+            animator.SetBool(AnimatorStrings.HasTarget, value);
+        }
+    }
+
+
+    void Update()
+    {
+        HasTarget = playerDetectionZone.detectedColliders.Count > 0;
+    }
 
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         touchingDirections = GetComponent<TouchingDirections>();
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
-        if (touchingDirections.IsGrounded && touchingDirections.IsOnWall)
+        if (touchingDirections.IsGrounded && (touchingDirections.IsOnWall || cliffDetectionZone.detectedColliders.Count == 0))
         {
             FlipDirection();
         }
@@ -54,15 +76,5 @@ public class Bolita : MonoBehaviour
     private void FlipDirection()
     {
         WalkDirection = WalkDirection == WalkableDirection.Right ? WalkableDirection.Left : WalkableDirection.Right;
-    }
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
     }
 }
