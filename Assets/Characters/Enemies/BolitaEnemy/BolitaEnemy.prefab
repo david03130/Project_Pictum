@@ -286,7 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDetectionZone: {fileID: 7043942543870059798}
   cliffDetectionZone: {fileID: 6244913872900182244}
-  walkSpeed: 3
+  walkSpeed: 1
 --- !u!114 &4678558974662480865
 MonoBehaviour:
   m_ObjectHideFlags: 0

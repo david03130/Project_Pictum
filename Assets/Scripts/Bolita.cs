@@ -31,7 +31,6 @@ public class Bolita : MonoBehaviour
             if (_walkDirection != value)
             {
                 gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y);
-
                 walkDirectionVector = value == WalkableDirection.Right ? Vector2.right : Vector2.left;
             }
             _walkDirection = value;
