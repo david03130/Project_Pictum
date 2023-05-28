@@ -12,5 +12,6 @@ namespace Assets.Scripts.Constants
         public const string Jump = "jump";
         public const string IsOnWall = "isOnWall";
         public const string IsOnCeiling = "isOnCeiling";
+        public const string HasTarget = "hasTarget";
     }
 }
