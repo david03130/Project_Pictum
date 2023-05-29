@@ -9,6 +9,9 @@ public class Bolita : MonoBehaviour
 {
     public DetectionZone playerDetectionZone;
     public DetectionZone cliffDetectionZone;
+    public DetectionZone damageDetectionZone;
+    public PlayerController playerToAttack;
+    public GameObject respawnPoint;
     public float walkSpeed;
     Rigidbody2D rigidBody;
     Animator animator;
@@ -53,6 +56,11 @@ public class Bolita : MonoBehaviour
     void Update()
     {
         HasTarget = playerDetectionZone.detectedColliders.Count > 0;
+
+        if (damageDetectionZone.detectedColliders.Count > 0)
+        {
+            playerToAttack.transform.localPosition = respawnPoint.transform.localPosition;
+        }
     }
 
     private void Awake()
